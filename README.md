@@ -1,4 +1,4 @@
-# CZ.NIC checker
+# CZ domain availability checker
 
 A tool to check availability of .cz domains. It parses **nic.cz whois checker** instead of the *whois* tool which is quite limited (only a couple of queries/min).
 
