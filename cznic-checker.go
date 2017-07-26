@@ -201,9 +201,7 @@ func getUserURL() string {
 	return strings.Replace(domain, "\n", "", -1)
 }
 
-func startArgLoop() {
-	urls := flag.Args()
-
+func startArgLoop(urls []string) {
 	for _, url := range urls {
 		processURL(url)
 	}
@@ -230,7 +228,7 @@ func main() {
 		startInteractiveLoop()
 	} else {
 		if len(flag.Args()) > 0 {
-			startArgLoop()
+			startArgLoop(flag.Args())
 		} else {
 			printUsage()
 		}
