@@ -201,27 +201,38 @@ func getUserURL() string {
 	return strings.Replace(domain, "\n", "", -1)
 }
 
+func startArgLoop() {
+	urls := flag.Args()
+
+	for _, url := range urls {
+		processURL(url)
+	}
+}
+
+func startInteractiveLoop() {
+	for {
+		processURL(getUserURL())
+	}
+}
+
+func printUsage() {
+	fmt.Printf("Usage: %s domain1[.cz][ domain2[ domain3]...]\n", os.Args[0])
+	fmt.Println("Available arguments:")
+	flag.PrintDefaults()
+}
+
 func main() {
 	interactive := flag.Bool("i", false, "Interactive mode")
 	flag.Parse()
 
 	if *interactive {
 		fmt.Println("Press CTRL-C to quit.")
-
-		for {
-			processURL(getUserURL())
-		}
+		startInteractiveLoop()
 	} else {
 		if len(flag.Args()) > 0 {
-			urls := flag.Args()
-
-			for _, url := range urls {
-				processURL(url)
-			}
+			startArgLoop()
 		} else {
-			fmt.Printf("Usage: %s domain1[.cz][ domain2[ domain3]...]\n", os.Args[0])
-			fmt.Println("Available arguments:")
-			flag.PrintDefaults()
+			printUsage()
 		}
 	}
 }
