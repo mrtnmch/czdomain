@@ -133,6 +133,8 @@ func processURLResult(url, content string) (*CheckResult, error) {
 }
 
 func normalizeCzURL(urlAddr string) (string, error) {
+	urlAddr = strings.TrimSpace(urlAddr)
+
 	if !strings.HasPrefix(urlAddr, "http://") {
 		urlAddr = "http://" + urlAddr
 	}
